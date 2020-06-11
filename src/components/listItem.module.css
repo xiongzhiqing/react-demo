@@ -1,0 +1,17 @@
+.common {
+  text-decoration: underline;
+  text-indent: 2em;
+}
+.title {
+  composes: common;
+  composes: font20 from "./common.module.css";
+  color: red;
+}
+.digital {
+  border-radius: 5px;
+  margin: 0 20px;
+  padding: 10px;
+  border: 1px solid #eaeaea;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+}
