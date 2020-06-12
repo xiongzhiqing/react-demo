@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import ListItem from './components/listItem'
+// import NavBar from './components/navbar'
+import NavBar from './components/navBarFunc'
+import ListPage from './components/listPage'
 // import ListItem from './components/listItemFunc'
 
 class App extends Component {
@@ -12,56 +14,36 @@ class App extends Component {
           id: 1,
           name: "Sony 65寸高清液晶电视",
           price: 4000,
-          stock: 20,
+          value: 20,
         },
         {
           id: 2,
           name: "---Sony 65寸高清液晶电视",
           price: 14000,
-          stock: 10,
+          value: 10,
         },
         {
           id: 3,
           name: "-1--Sony 65寸高清液晶电视",
           price: 14000,
-          stock: 10,
-        },
-        {
-          id: 4,
-          name: "--2-Sony 65寸高清液晶电视",
-          price: 14000,
-          stock: 10,
-        },
-        {
-          id: 5,
-          name: "---3Sony 65寸高清液晶电视",
-          price: 14000,
-          stock: 10,
-        },
-        {
-          id: 6,
-          name: "---4Sony 65寸高清液晶电视",
-          price: 14000,
-          stock: 10,
-        },
-        {
-          id: 7,
-          name: "5---Sony 65寸高清液晶电视",
-          price: 14000,
-          stock: 10,
+          value: 10,
         },
       ]
     }
   }
 
-  renderList () {
-    if (this.state.listData.length === 0) {
-      return <div className="container">购物车是空的</div>
-    }
-    return this.state.listData.map((item, index) => {
-      return <ListItem key={item.id} data={item} index={index} onDelete={this.handleDelete} />
+
+  handleReset = () => {
+    const listData = this.state.listData.map(item => {
+      const _item = { ...item }
+      _item.value = 0
+      return _item
+    })
+    this.setState({
+      listData
     })
   }
+
   handleDelete = (id) => {
     const listData = this.state.listData.filter(item => item.id !== id)
     console.log(id)
@@ -70,11 +52,52 @@ class App extends Component {
     })
   }
 
+  handleDecrease = (id) => {
+    const _data = this.state.listData.map(item => {
+      if (item.id === id) {
+        const _item = { ...item }
+        _item.value--
+        if (_item.value < 0) _item.value = 0
+        return _item
+      }
+      return item
+    })
+
+    this.setState({
+      listData: _data
+    })
+  }
+
+  handleIncrease = (id) => {
+    const _data = this.state.listData.map(item => {
+      if (item.id === id) {
+        const _item = { ...item }
+        _item.value++
+        return _item
+      }
+      return item
+    })
+
+    this.setState({
+      listData: _data
+    })
+  }
+
   render () {
-    return (<div className="container">
-      <div className='title'>Hello React</div>
-      {this.renderList()}
-    </div>);
+    return (
+      <React.Fragment>
+        <NavBar
+          onReset={this.handleReset}
+          total={this.state.listData.reduce((a, b) => a + b.value, 0)}
+        />
+        <ListPage
+          data={this.state.listData}
+          handleDecrease={this.handleDecrease}
+          handleIncrease={this.handleIncrease}
+          handleDelete={this.handleDelete}
+        />
+      </React.Fragment>
+    );
   }
 }
 

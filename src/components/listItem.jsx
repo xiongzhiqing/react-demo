@@ -4,43 +4,18 @@ import classnames from 'classnames/bind'
 const cls = classnames.bind(style)
 
 class ListItem extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-    // this.handleDecrease = this.handleDecrease.bind(this)
-  }
-  doSomethingWithCount () {
-    if (this.state.count <= 0) {
-      this.setState({
-        count: 0,
-      });
-    }
-  }
-  handleDecrease = (ev, id) => {
-    this.setState({
-      count: this.state.count - 1,
-    });
-    this.doSomethingWithCount();
-    console.log("---", ev, id, this.state.count);
-  };
-  handleIncrease = () => {
-    console.log("===");
-    this.setState(
-      {
-        count: this.state.count + 1,
-      },
-      () => {
-        console.log("step 3", this.state.count);
-      }
-    );
-    console.log(this.state.count);
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     count: this.props.data.value || 0,
+  //   };
+  //   // this.handleDecrease = this.handleDecrease.bind(this)
+  // }
+
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log("props", nextProps, this.props);
   //   console.log("state", nextState, this.state);
-  //   if (this.state.count === nextState.count) return false;
+  //   if (this.props.data.value === nextState.count) return false;
   //   return true;
   // }
   render () {
@@ -54,21 +29,21 @@ class ListItem extends PureComponent {
         <div className="col-2 themed-grid-col">¥{this.props.data.price}</div>
         <div
           className={`col-2 themed-grid-col ${
-            this.state.count ? "" : "themed-grid-col-a"
+            this.props.data.value ? "" : "themed-grid-col-a"
             }`}
         >
           <button
-            onClick={(ev) => {
-              this.handleDecrease(ev, this.props.data.id);
+            onClick={() => {
+              this.props.onDecrease(this.props.data.id);
             }}
             type="button"
             className="btn btn-primary"
           >
             -
           </button>
-          <span className={cls('digital')}>{this.state.count}</span>
+          <span className={cls('digital')}>{this.props.data.value}</span>
           <button
-            onClick={this.handleIncrease}
+            onClick={() => this.props.onIncrease(this.props.data.id)}
             type="button"
             className="btn btn-primary"
           >
@@ -76,7 +51,7 @@ class ListItem extends PureComponent {
           </button>
         </div>
         <div className="col-1 themed-grid-col">
-          ¥ {this.props.data.price * this.state.count}
+          ¥ {this.props.data.price * this.props.data.value}
         </div>
         <div className="col-1 themed-grid-col">
           <button
