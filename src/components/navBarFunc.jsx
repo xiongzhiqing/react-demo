@@ -1,13 +1,14 @@
 /*
  * @Author: xiongzhiqing@everjiankang.com
  * @Date: 2020-06-12 10:06:55
- * @Last Modified by:   xiongzhiqing@everjiankang.com
- * @Last Modified time: 2020-06-12 10:06:55
+ * @Last Modified by: xiongzhiqing@everjiankang.com
+ * @Last Modified time: 2020-06-12 10:58:18
  * 无状态组件
  */
 import React from 'react';
 
 const NavBar = ({ total, onReset }) => {
+  console.log('Navbar - rendering')
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">

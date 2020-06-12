@@ -1,14 +1,14 @@
 /*
  * @Author: xiongzhiqing@everjiankang.com
  * @Date: 2020-06-12 10:07:12
- * @Last Modified by:   xiongzhiqing@everjiankang.com
- * @Last Modified time: 2020-06-12 10:07:12
+ * @Last Modified by: xiongzhiqing@everjiankang.com
+ * @Last Modified time: 2020-06-12 10:56:57
  */
 import React, { PureComponent } from 'react';
 
 class NavBar extends PureComponent {
-
   render () {
+    console.log('Navbar render')
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">

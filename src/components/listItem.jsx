@@ -18,8 +18,18 @@ class ListItem extends PureComponent {
   //   if (this.props.data.value === nextState.count) return false;
   //   return true;
   // }
+  componentDidUpdate (nextProps) {
+    if (nextProps.data.value !== this.props.data.value) {
+      console.log('Item - Updated')
+    }
+  }
+
+  componentWillUnmount () {
+    console.log('Item - Delete')
+  }
+
   render () {
-    console.log("item is rendering");
+    console.log('Item - rendering')
     return (
       <div className={`row mb-3 ${this.props.index % 2 === 0 ? "single" : ""}`}>
         {/* <div className="col-6 themed-grid-col" style={{ color: "red" }}> */}

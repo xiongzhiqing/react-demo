@@ -3,11 +3,16 @@ import './App.css';
 // import NavBar from './components/navbar'
 import NavBar from './components/navBarFunc'
 import ListPage from './components/listPage'
+import ItemA from './components/hoc/itemA'
+import ItemB from './components/hoc/itemB'
+import ItemC from './components/rp/itemC.jsx'
+import ItemD from './components/rp/itemD.jsx'
 // import ListItem from './components/listItemFunc'
 
 class App extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       listData: [
         {
@@ -30,8 +35,12 @@ class App extends Component {
         },
       ]
     }
+    console.log('App - constructor')
   }
 
+  componentDidMount () {
+    console.log('App - mount')
+  }
 
   handleReset = () => {
     const listData = this.state.listData.map(item => {
@@ -84,6 +93,7 @@ class App extends Component {
   }
 
   render () {
+    console.log('App -rendering')
     return (
       <React.Fragment>
         <NavBar
@@ -96,6 +106,10 @@ class App extends Component {
           handleIncrease={this.handleIncrease}
           handleDelete={this.handleDelete}
         />
+        <ItemA id={1} />
+        <ItemB />
+        <ItemC />
+        <ItemD />
       </React.Fragment>
     );
   }
